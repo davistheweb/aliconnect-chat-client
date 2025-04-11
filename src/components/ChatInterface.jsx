@@ -98,6 +98,7 @@ export default function ChatInterface() {
       }
 
       const data = await response.json();
+      console.log(data, data.response);
       const aiResponse = data.response;
       setMessages((prev) => [
         ...prev,
