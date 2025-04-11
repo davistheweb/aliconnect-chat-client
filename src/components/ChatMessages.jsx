@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 
-export default function ChatMessages({ messages, darkMode, fontSize }) {
+export default function ChatMessages({ messages, darkMode, fontSize, isLoading }) {
   const messagesEndRef = useRef(null);
 
   useEffect(() => {
@@ -36,7 +36,7 @@ export default function ChatMessages({ messages, darkMode, fontSize }) {
                   : `${darkMode ? "bg-gray-800 border-gray-700" : "bg-white border-gray-200"} ${darkMode ? "text-gray-200" : "text-gray-800"} border rounded-tl-none shadow-sm`
               }`}
             >
-              {message.image && (
+              {/* {message.image && (
                 <div className="mb-2">
                   <img
                     src={message.image || "/placeholder.svg"}
@@ -44,10 +44,13 @@ export default function ChatMessages({ messages, darkMode, fontSize }) {
                     className="max-w-full rounded-lg"
                   />
                 </div>
-              )}
+              )} */}
+
               <div
                 className={messageTextClass}
-                dangerouslySetInnerHTML={{ __html: message.content }}
+                dangerouslySetInnerHTML={{
+                  __html: message.content,
+                }}
               />
               <p
                 className={`mt-1 ${timestampTextClass} ${message.sender === "user" ? (darkMode ? "text-200" : "text-100") : darkMode ? "text-gray-400" : "text-gray-500"}`}
@@ -61,6 +64,15 @@ export default function ChatMessages({ messages, darkMode, fontSize }) {
           </div>
         ))}
         <div ref={messagesEndRef} />
+        {isLoading && (
+          <div class="thinking-container">
+            <div class="thinking-indicator">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

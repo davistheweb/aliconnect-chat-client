@@ -12,6 +12,7 @@ export default function ChatInterface() {
       content:
         "Hi there! 👋 Welcome to AliConnects Shopping Assistant. How can I help you today?",
       sender: "bot",
+      ai: false,
       timestamp: new Date(),
     },
   ]);
@@ -56,6 +57,7 @@ export default function ChatInterface() {
     const newMessage = {
       content: inputValue,
       sender: "user",
+      ai: false,
       timestamp: new Date(),
     };
 
@@ -70,18 +72,17 @@ export default function ChatInterface() {
   };
 
   const generateAIResponse = async (userMessage) => {
-    setMessages((prev) => [
+/*     setMessages((prev) => [
       ...prev,
       {
         content: "Thinking...",
         sender: "bot",
         timestamp: new Date(),
       },
-    ]);
-
-    setIsLoading(true);
-
+    ]); */
     try {
+      setIsLoading((prev) => !prev);
+      
       const API_URL = import.meta.env.VITE_API_ALIXIA_BACKEND;
       const response = await fetch(API_URL, {
         method: "POST",
@@ -102,25 +103,30 @@ export default function ChatInterface() {
       const aiResponse = data.response;
       setMessages((prev) => [
         ...prev,
+        
         {
           content: aiResponse,
           sender: "bot",
+          ai: true,
           timestamp: new Date(),
         },
       ]);
 
       if (soundEnabled) playMessageSound("received", soundEnabled);
     } catch (error) {
+      console.error(`An Error Occured ${error}`);
+      
       setMessages((prev) => [
         ...prev,
         {
           content: `I'm having trouble connecting to my knowledge base, failed to connect to service`,
           sender: "bot",
+          ai: false,
           timestamp: new Date(),
         },
       ]);
     } finally {
-      setIsLoading(false);
+      setIsLoading((prev)=> !prev);
     }
   };
 
@@ -153,6 +159,7 @@ export default function ChatInterface() {
         messages={messages}
         darkMode={darkMode}
         fontSize={fontSize}
+        isLoading={isLoading}
       />
 
       <ChatInput
