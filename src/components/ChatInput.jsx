@@ -98,7 +98,7 @@ export default function ChatInput({
             onChange={(e) => setInputValue(e.target.value)}
             onKeyDown={handleKeyDown}
             placeholder="Ask about products, shipping, or store policies..."
-            className={`flex-1 ${darkMode ? "bg-transparent text-white placeholder-gray-400" : "bg-transparent text-gray-700"} outline-none text-sm`}
+            className={`flex-1 ${darkMode ? "bg-transparent text-white placeholder-gray-400" : "bg-transparent text-gray-700"} outline-none text-base`}
             disabled={isLoading}
           />
 
