@@ -113,7 +113,7 @@ export default function ChatInterface() {
       setMessages((prev) => [
         ...prev,
         {
-          content: `I'm having trouble connecting to my knowledge base, An Error occured : ${error}`,
+          content: `I'm having trouble connecting to my knowledge base, failed to connect to service`,
           sender: "bot",
           timestamp: new Date(),
         },
