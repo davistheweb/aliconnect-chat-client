@@ -60,8 +60,8 @@ export default function ChatMessages({
         ))}
         <div ref={messagesEndRef} />
         {isLoading && (
-          <div class="thinking-container">
-            <div class="thinking-indicator">
+          <div className="thinking-container">
+            <div className="thinking-indicator">
               <span></span>
               <span></span>
               <span></span>
