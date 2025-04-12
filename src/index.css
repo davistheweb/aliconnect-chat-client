@@ -56,7 +56,6 @@ body {
 }
 
 .thinking-container {
-  background-color: #f8f8f8; /* Light cyan background color for a message-like effect */
   padding: 12px 20px; /* More padding for a better feel */
   border-radius: 30px; /* Round corners to make it look like a message bubble */
   display: inline-flex; /* Ensures the container size adjusts based on its content */
