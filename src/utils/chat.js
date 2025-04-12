@@ -1,7 +1,4 @@
-// Utility functions for the chat interface
-
 import axios from "axios";
-import { useState } from "react";
 
 // Generate a unique ID for messages
 export const generateUniqueId = () =>
@@ -18,14 +15,12 @@ export const generateAIResponse = (
   userMessage,
   setIsLoading,
   setMessages,
-  soundEnabled,
+  soundEnabled
 ) => {
   setIsLoading((prev) => !prev);
   const API_URL = import.meta.env.VITE_API_ALIXIA_BACKEND;
   axios
-    .post(API_URL, {
-      message: userMessage,
-    })
+    .post(API_URL, { message: userMessage })
     .then((res) => {
       const aiResponse = res.data.response;
       setMessages((prev) => [
