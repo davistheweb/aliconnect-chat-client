@@ -91,10 +91,13 @@ body {
 }
 
 @keyframes bounce {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0);
   }
   50% {
-    transform: translateY(-12px); /* Increased bounce height for more emphasis */
+    transform: translateY(
+      -12px
+    ); /* Increased bounce height for more emphasis */
   }
 }

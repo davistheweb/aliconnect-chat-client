@@ -30,11 +30,7 @@ export default function ChatHeader({
                 : "bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent"
             }`}
           >
-            <img
-              src={aliconnect_logo}
-              alt=""
-              className="h-10 w-15 mr-2"
-            />
+            <img src={aliconnect_logo} alt="" className="h-10 w-15 mr-2" />
           </h1>
 
           {/* Mobile Menu Button */}

@@ -2,7 +2,12 @@
 
 import { useEffect, useRef } from "react";
 
-export default function ChatMessages({ messages, darkMode, fontSize, isLoading }) {
+export default function ChatMessages({
+  messages,
+  darkMode,
+  fontSize,
+  isLoading,
+}) {
   const messagesEndRef = useRef(null);
 
   useEffect(() => {
@@ -36,16 +41,6 @@ export default function ChatMessages({ messages, darkMode, fontSize, isLoading }
                   : `${darkMode ? "bg-gray-800 border-gray-700" : "bg-white border-gray-200"} ${darkMode ? "text-gray-200" : "text-gray-800"} border rounded-tl-none shadow-sm`
               }`}
             >
-              {/* {message.image && (
-                <div className="mb-2">
-                  <img
-                    src={message.image || "/placeholder.svg"}
-                    alt="Product or uploaded content"
-                    className="max-w-full rounded-lg"
-                  />
-                </div>
-              )} */}
-
               <div
                 className={messageTextClass}
                 dangerouslySetInnerHTML={{

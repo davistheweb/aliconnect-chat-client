@@ -4,7 +4,7 @@ import ChatHeader from "./ChatHeader";
 import ChatMessages from "./ChatMessages";
 import ChatInput from "./ChatInput";
 import ChatSettings from "./ChatSettings";
-import { playMessageSound } from "../utils/chat-utils";
+import { playMessageSound, generateAIResponse} from "../utils/chat";
 
 export default function ChatInterface() {
   const [messages, setMessages] = useState([
@@ -68,67 +68,10 @@ export default function ChatInterface() {
       playMessageSound("sent", soundEnabled);
     }
 
-    generateAIResponse(inputValue);
+    generateAIResponse(inputValue, setIsLoading, setMessages, soundEnabled);
   };
 
-  const generateAIResponse = async (userMessage) => {
-/*     setMessages((prev) => [
-      ...prev,
-      {
-        content: "Thinking...",
-        sender: "bot",
-        timestamp: new Date(),
-      },
-    ]); */
-    try {
-      setIsLoading((prev) => !prev);
-      
-      const API_URL = import.meta.env.VITE_API_ALIXIA_BACKEND;
-      const response = await fetch(API_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ message: userMessage }),
-      });
-
-      if (!response.ok) {
-        const errorText = await response.text();
-        console.error("Alixia Ai Error: ", response.status, errorText);
-        throw new Error(`API error: ${response.status}`);
-      }
-
-      const data = await response.json();
-      console.log(data, data.response);
-      const aiResponse = data.response;
-      setMessages((prev) => [
-        ...prev,
-        
-        {
-          content: aiResponse,
-          sender: "bot",
-          ai: true,
-          timestamp: new Date(),
-        },
-      ]);
-
-      if (soundEnabled) playMessageSound("received", soundEnabled);
-    } catch (error) {
-      console.error(`An Error Occured ${error}`);
-      
-      setMessages((prev) => [
-        ...prev,
-        {
-          content: `I'm having trouble connecting to my knowledge base, failed to connect to service`,
-          sender: "bot",
-          ai: false,
-          timestamp: new Date(),
-        },
-      ]);
-    } finally {
-      setIsLoading((prev)=> !prev);
-    }
-  };
+  
 
   return (
     <div
