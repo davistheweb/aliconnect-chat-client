@@ -1,5 +1,3 @@
-"use client";
-
 import { useState, useRef, useEffect } from "react";
 import { Send, Mic, MicOff, Loader } from "lucide-react";
 

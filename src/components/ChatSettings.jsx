@@ -1,4 +1,3 @@
-"use client";
 import { X, Volume2, VolumeX } from "lucide-react";
 
 export default function ChatSettings({
@@ -8,7 +7,7 @@ export default function ChatSettings({
   soundEnabled,
   setSoundEnabled,
 }) {
-  if (!isOpen) return null;
+  if (!isOpen) return "";
 
   return (
     <div

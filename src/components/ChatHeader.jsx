@@ -1,5 +1,3 @@
-"use client";
-
 import { Moon, Sun, Settings, Type, Menu, X } from "lucide-react";
 import { useState } from "react";
 import aliconnect_logo from "../assets/images/Aliconnect_logo.svg";
@@ -64,16 +62,6 @@ export default function ChatHeader({
             </select>
           </div>
 
-          {/* Feature Indicators 
-          <div className="flex items-center space-x-2 mr-2">
-            <span className="inline-flex items-center px-2 py-1 rounded-full text-xs bg-purple-100 text-800">
-              <Mic size={12} className="mr-1" /> Voice
-            </span>
-            <span className="inline-flex items-center px-2 py-1 rounded-full text-xs bg-blue-100 text-blue-800">
-              <Image size={12} className="mr-1" /> Images
-            </span>
-          </div>*/}
-
           {/* Dark Mode Toggle */}
           <button
             onClick={toggleDarkMode}
@@ -134,16 +122,6 @@ export default function ChatHeader({
                 <option value="xlarge">X-Large</option>
               </select>
             </div>
-
-            {/* Feature Indicators 
-            <div className="flex space-x-2">
-              <span className={`inline-flex items-center px-3 py-2 rounded-full text-xs ${darkMode ? "bg-purple-900 text-purple-100" : "bg-purple-100 text-purple-800"}`}>
-                <Mic size={12} className="mr-1" /> Voice
-              </span>
-              <span className={`inline-flex items-center px-3 py-2 rounded-full text-xs ${darkMode ? "bg-blue-900 text-blue-100" : "bg-blue-100 text-blue-800"}`}>
-                <Image size={12} className="mr-1" /> Images
-              </span>
-            </div>*/}
 
             {/* Action Buttons */}
             <div className="flex space-x-2 pt-2">

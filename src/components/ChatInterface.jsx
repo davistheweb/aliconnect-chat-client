@@ -1,10 +1,9 @@
-"use client";
 import { useState, useEffect } from "react";
 import ChatHeader from "./ChatHeader";
 import ChatMessages from "./ChatMessages";
 import ChatInput from "./ChatInput";
 import ChatSettings from "./ChatSettings";
-import { playMessageSound, generateAIResponse} from "../utils/chat";
+import { playMessageSound, generateAIResponse } from "../utils/chat";
 
 export default function ChatInterface() {
   const [messages, setMessages] = useState([
@@ -23,6 +22,7 @@ export default function ChatInterface() {
   const [fontSize, setFontSize] = useState("medium");
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [soundEnabled, setSoundEnabled] = useState(true);
+
   useEffect(() => {
     const savedDarkMode = localStorage.getItem("aliconnects-dark-mode");
     const savedFontSize = localStorage.getItem("aliconnects-font-size");
@@ -70,8 +70,6 @@ export default function ChatInterface() {
 
     generateAIResponse(inputValue, setIsLoading, setMessages, soundEnabled);
   };
-
-  
 
   return (
     <div

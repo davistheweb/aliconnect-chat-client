@@ -7,15 +7,13 @@ export const generateUniqueId = () =>
 // Play message sound
 export function playMessageSound(type, soundEnabled) {
   if (!soundEnabled) return;
-  //console.log(`Playing ${type} sound`);
-  // Implementation would go here
 }
 
 export const generateAIResponse = (
   userMessage,
   setIsLoading,
   setMessages,
-  soundEnabled
+  soundEnabled,
 ) => {
   setIsLoading((prev) => !prev);
   const API_URL = import.meta.env.VITE_API_ALIXIA_BACKEND;
