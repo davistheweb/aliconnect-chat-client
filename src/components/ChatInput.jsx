@@ -82,6 +82,12 @@ export default function ChatInput({
     }
   };
 
+  const inputEle = useRef(null);
+
+  useEffect(() => {
+    inputEle.current.focus();
+  },[])
+
   return (
     <div
       className={`p-4 border-t ${darkMode ? "border-gray-700 bg-gray-800" : "border-gray-200 bg-white"}`}
@@ -98,6 +104,7 @@ export default function ChatInput({
             placeholder="Ask about products, shipping, or store policies..."
             className={`flex-1 ${darkMode ? "bg-transparent text-white placeholder-gray-400" : "bg-transparent text-gray-700"} outline-none text-base`}
             disabled={isLoading}
+            ref={inputEle}
           />
 
           <div className="flex items-center space-x-2 ml-2">
