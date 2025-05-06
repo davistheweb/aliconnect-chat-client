@@ -1,6 +1,6 @@
 import { Moon, Sun, Settings, Type, Menu, X } from "lucide-react";
 import { useState } from "react";
-import aliconnect_logo from "../assets/images/Aliconnect_logo.svg";
+import { aliconnect_logo } from "../assets";
 
 export default function ChatHeader({
   darkMode,
