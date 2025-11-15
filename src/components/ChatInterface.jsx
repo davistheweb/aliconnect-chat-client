@@ -11,7 +11,7 @@ export default function ChatInterface() {
       content:
         "Hi there! 👋 Welcome to AliConnects Shopping Assistant. How can I help you today?",
       sender: "bot",
-      ai: false,
+      ai: true,
       timestamp: new Date(),
     },
   ]);
@@ -23,6 +23,7 @@ export default function ChatInterface() {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [soundEnabled, setSoundEnabled] = useState(true);
 
+  // Load saved preferences
   useEffect(() => {
     const savedDarkMode = localStorage.getItem("aliconnects-dark-mode");
     const savedFontSize = localStorage.getItem("aliconnects-font-size");
@@ -34,26 +35,23 @@ export default function ChatInterface() {
       setSoundEnabled(JSON.parse(savedSoundEnabled));
   }, []);
 
+  // Save preferences
   useEffect(() => {
     localStorage.setItem("aliconnects-dark-mode", JSON.stringify(darkMode));
     localStorage.setItem("aliconnects-font-size", fontSize);
     localStorage.setItem(
       "aliconnects-sound-enabled",
-      JSON.stringify(soundEnabled),
+      JSON.stringify(soundEnabled)
     );
   }, [darkMode, fontSize, soundEnabled]);
 
-  const toggleDarkMode = () => {
-    setDarkMode((prev) => !prev);
-  };
+  const toggleDarkMode = () => setDarkMode((prev) => !prev);
+  const toggleSettings = () => setIsSettingsOpen((prev) => !prev);
 
-  const toggleSettings = () => {
-    setIsSettingsOpen((prev) => !prev);
-  };
+  const handleSendMessage = async () => {
+    if (!inputValue.trim()) return;
 
-  const handleSendMessage = () => {
-    if (inputValue.trim() === "") return;
-
+    // New user message
     const newMessage = {
       content: inputValue,
       sender: "user",
@@ -61,21 +59,24 @@ export default function ChatInterface() {
       timestamp: new Date(),
     };
 
-    setMessages((prev) => [...prev, newMessage]);
+    const updatedMessages = [...messages, newMessage];
+    setMessages(updatedMessages);
     setInputValue("");
 
-    if (soundEnabled) {
-      playMessageSound("sent", soundEnabled);
-    }
+    if (soundEnabled) playMessageSound("sent", soundEnabled);
 
-    generateAIResponse(inputValue, setIsLoading, setMessages, soundEnabled);
+    // Send entire conversation to backend
+    await generateAIResponse(
+      updatedMessages,
+      setIsLoading,
+      setMessages,
+      soundEnabled
+    );
   };
 
   return (
     <div
-      className={`flex flex-col h-screen ${
-        darkMode ? "bg-gray-900" : "bg-gray-50"
-      }`}
+      className={`flex flex-col h-screen ${darkMode ? "bg-gray-900" : "bg-gray-50"}`}
     >
       <ChatHeader
         darkMode={darkMode}
