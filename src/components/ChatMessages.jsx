@@ -1,4 +1,7 @@
 import { useEffect, useRef } from "react";
+import ReactMarkdown from "react-markdown";
+import rehypeSanitize, { defaultSchema } from "rehype-sanitize";
+import rehypeRaw from "rehype-raw";
 
 export default function ChatMessages({
   messages,
@@ -18,6 +21,20 @@ export default function ChatMessages({
     large: "text-base",
     xlarge: "text-lg",
   };
+
+const customSchema = {
+  ...defaultSchema,
+  attributes: {
+    ...defaultSchema.attributes,
+    a: [
+      ...(defaultSchema.attributes?.a || []),
+      "href",
+      "target",
+      "rel",
+      "style",
+    ],
+  },
+};;
 
   const messageTextClass = fontSizeClasses[fontSize] || "text-sm";
   const timestampTextClass = fontSize === "xlarge" ? "text-sm" : "text-xs";
@@ -39,12 +56,19 @@ export default function ChatMessages({
                   : `${darkMode ? "bg-gray-800 border-gray-700" : "bg-white border-gray-200"} ${darkMode ? "text-gray-200" : "text-gray-800"} border rounded-tl-none shadow-sm`
               }`}
             >
-              <div
+              <div className={messageTextClass}>
+                <ReactMarkdown
+                  rehypePlugins={[[rehypeRaw], [rehypeSanitize, customSchema]]}
+                >
+                  {message.content}
+                </ReactMarkdown>
+              </div>
+              {/* <div
                 className={messageTextClass}
                 dangerouslySetInnerHTML={{
                   __html: message.content,
                 }}
-              />
+              /> */}
               <p
                 className={`mt-1 ${timestampTextClass} ${message.sender === "user" ? (darkMode ? "text-200" : "text-100") : darkMode ? "text-gray-400" : "text-gray-500"}`}
               >
